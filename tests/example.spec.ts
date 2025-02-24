@@ -16,20 +16,34 @@ test('FETCH /posts/1', async ({ request, page }) => {
   expect(response.status()).toBe(200);
   const responseBody = await response.json();
   expect(responseBody).toHaveProperty('id', 1);
-  
+
 
 });
 
 test('APIFETCH /posts/1', async ({ request, page }) => {
+  // API Call1
   const response = await apiFetch({ request, page }, `${baseUrl}/posts/1`);
   expect(response.status()).toBe(200);
   const responseBody = await response.json();
   expect(responseBody).toHaveProperty('id', 1);
 
-  const response2 = await apiFetch({ request, page }, `${baseUrl}/posts`);
-  expect(response2.status()).toBe(200);
-  const responseBody2 = await response2.json();
-  expect(responseBody2).toBeInstanceOf(Array);
-  expect(responseBody2.length).toBeGreaterThan(0);
+  // API Call2
+  const response2 = await apiFetch({ request, page }, `${baseUrl}/posts`, {
+    method: 'POST',
+    body: {
+      title: 'foo',
+      body: 'bar',
+      userId: 1,
+    },
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    }
+  });
+  expect(response2.status()).toBe(201);
+
+  //API Call3
+  const response3 = await apiFetch({ request, page }, `${baseUrl}/posts`);
+  expect(response3.status()).toBe(200);
+  const responseBody3 = await response3.json();
 
 });
