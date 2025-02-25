@@ -7,7 +7,17 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
     const baseUrl = 'https://jsonplaceholder.typicode.com';
 
 
-    test('Test for apiGet, apiPost and apiFetch', async ({ request, page }) => {
+    test('Test for apiFetch', async ({ request, page }) => {
+
+        // Example of apiFetch (default GET)
+        const responseFetch = await apiFetch({ request, page }, `${baseUrl}/posts`);
+        expect(responseFetch.status()).toBe(200);
+
+    })
+
+
+    test('Test for apiGet, apiPost, apiPut, apiPatch, and apiDelete', async ({ request, page }) => {
+        
         // Example of apiGet
         const responseGet = await apiGet({ request, page }, `${baseUrl}/posts/1`);
         expect(responseGet.status()).toBe(200);
@@ -28,15 +38,7 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
         });
         expect(responsePost.status()).toBe(201);
 
-        
-        // Example of apiFetch (default GET)
-        const responseFetch = await apiFetch({ request, page }, `${baseUrl}/posts`);
-        expect(responseFetch.status()).toBe(200);
 
-    })
-
-
-    test('Test for apiPut, apiPatch, and apiDelete', async ({ request, page }) => {
         // Example of apiPut
         const responsePut = await apiPut({ request, page }, 'https://jsonplaceholder.typicode.com/posts/1', {
             body: {
