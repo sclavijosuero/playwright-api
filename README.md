@@ -4,6 +4,8 @@ Playwright plugin for comprehensive API testing, presenting results in a user-fr
 
 ## Main Features
 
+[...]
+
 
 ## Installation
 
@@ -211,6 +213,11 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+
+## Contributing
+
+[...]
 
 
 ## Changelog
