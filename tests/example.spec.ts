@@ -7,7 +7,7 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
     const baseUrl = 'https://jsonplaceholder.typicode.com';
 
 
-    test('Test for apiFetch', async ({ request, page }) => {
+    test('Test for apiFetch (default GET)', async ({ request, page }) => {
 
         // Example of apiFetch (default GET)
         const responseFetch = await apiFetch({ request, page }, `${baseUrl}/posts`);
@@ -17,7 +17,7 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
 
 
     test('Test for apiGet, apiPost, apiPut, apiPatch, and apiDelete', async ({ request, page }) => {
-        
+
         // Example of apiGet
         const responseGet = await apiGet({ request, page }, `${baseUrl}/posts/1`);
         expect(responseGet.status()).toBe(200);
