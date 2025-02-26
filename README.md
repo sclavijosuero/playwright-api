@@ -8,6 +8,7 @@ Playwright plugin for comprehensive API testing and presenting results in a user
 - These functions display each API request and response information in the **Playwright UI**.
 - You can use multiple calls to these functions within the same test if you need to test multiple endpoints.
 
+![Overview](images/overview.png)
 
 ## Installation
 
