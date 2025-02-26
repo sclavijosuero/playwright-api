@@ -1,4 +1,4 @@
-# pw-api
+# playwright-api
 
 Playwright plugin for comprehensive API testing and presenting results in a user-friendly manner in the Playwright UI.
 
@@ -13,7 +13,7 @@ Playwright plugin for comprehensive API testing and presenting results in a user
 ## Installation
 
 ```sh
-npm install -D pw-api
+npm install -D playwrightw-api
 ```
 
 ## Compatibility
@@ -24,7 +24,7 @@ npm install -D pw-api
 - Add the following line to your test file:
 
   ```js
-  import 'pw-api';
+  import 'playwrightw-api';
   ```
 
 
@@ -145,7 +145,7 @@ This library introduces new functions for the Playwright request methods: `get`,
 To utilize these functions, include the following import statement at the top of your test file:
 
 ```js
-import { apiFetch, apiGet, apiPost, apiPut, apiDelete, apiPatch, apiHead } from 'pw-api';
+import { apiFetch, apiGet, apiPost, apiPut, apiDelete, apiPatch, apiHead } from 'playwrightw-api';
 ```
 
 > Note: You do not need to import all seven functions—only those you will use in your tests.
@@ -171,7 +171,7 @@ const responseGet = await apiGet({ request, page }, `${baseUrl}/posts/1`);
 // tests/example.spec.ts
 
 import { test, expect } from '@playwright/test';
-import { apiFetch, apiGet, apiPost, apiPut, apiDelete, apiPatch, apiHead } from 'pw-api';
+import { apiFetch, apiGet, apiPost, apiPut, apiDelete, apiPatch, apiHead } from 'playwrightw-api';
 
 
 test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
