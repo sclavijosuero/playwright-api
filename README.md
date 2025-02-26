@@ -1,6 +1,6 @@
 # pw-api (Beta)
 
-Playwright plugin for comprehensive API testing, presenting results in a user-friendly manner.
+Playwright plugin for comprehensive API testing and presenting results in a user-friendly manner in the Playwright UI.
 
 ## Main Features
 
