@@ -6,12 +6,18 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
 
     const baseUrl = 'https://jsonplaceholder.typicode.com';
 
-    test('Testing API Endpoints - Perform Single Call for Each CRUD Operation (GET, POST, PUT, PATCH, DELETE)', async ({ request, page }) => {
+    test('Testing API Endpoints - Perform Single Call for Each CRUD Operation (GET, HEAD, POST, PUT, PATCH, DELETE)', async ({ request, page }) => {
+
         // Example of apiGet
         const responseGet = await apiGet({ request, page }, `${baseUrl}/posts/1`);
         expect(responseGet.status()).toBe(200);
         const responseBodyGet = await responseGet.json();
         expect(responseBodyGet).toHaveProperty('id', 1);
+
+
+        // Example of apiHead
+        const responseHead = await apiHead({ request, page }, `${baseUrl}/posts/1`);
+        expect(responseHead.status()).toBe(200);
 
 
         // Example of apiPost with request body and request headers
@@ -26,6 +32,8 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
             }
         });
         expect(responsePost.status()).toBe(201);
+        const responseBodyPost = await responsePost.json();
+        expect(responseBodyPost).toHaveProperty('id', 101);
 
 
         // Example of apiPut
@@ -41,6 +49,8 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
             },
         });
         expect(responsePut.ok()).toBeTruthy();
+        const responseBodyPut = await responsePut.json();
+        expect(responseBodyPut).toHaveProperty('id', 1);
 
 
         // Example of apiPatch
@@ -58,6 +68,7 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
         // Example for apiDelete
         const responseDelete = await apiDelete({ request, page }, 'https://jsonplaceholder.typicode.com/posts/1');
         expect(responseDelete.ok()).toBeTruthy();
+
     })
 
 
@@ -65,6 +76,8 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
         // Example of apiFetch (default GET)
         const responseFetch = await apiFetch({ request, page }, `${baseUrl}/posts`);
         expect(responseFetch.status()).toBe(200);
+        const responseBodyFetch = await responseFetch.json();
+        expect(responseBodyFetch.length).toBeGreaterThan(4);
     })
 
 })

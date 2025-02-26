@@ -4,7 +4,9 @@ Playwright plugin for comprehensive API testing, presenting results in a user-fr
 
 ## Main Features
 
-[...]
+- Lightweight library introducing new functions: `apiGet`, `apiPost`, `apiPut`, `apiPatch`, `apiDelete`, `apiHead` and `apiFetch` for testing API requests in the Playwright test framework.
+- These functions display each API request and response information in the **Playwright UI**.
+- You can use multiple calls to these functions within the same test if you need to test multiple endpoints.
 
 
 ## Installation
@@ -135,23 +137,58 @@ Sends a HEAD request to the specified URL and adds the API response to the UI.
 
 ## Usage
 
+### How to Use this Library
+
+This library introduces new functions for the Playwright request methods: `get`, `post`, `put`, `patch`, `delete`, `head` and `fetch` within the `APIRequestContext` class. These methods display API request and response information in the **Playwright UI**.
+
+To utilize these functions, include the following import statement at the top of your test file:
+
+```js
+import { apiFetch, apiGet, apiPost, apiPut, apiDelete, apiPatch, apiHead } from 'pw-api';
+```
+
+> Note: You do not need to import all seven functions—only those you will use in your tests.
+
+Since API request and response information is displayed in the Playwright UI, these new API functions require an object containing the `request` and `page` fixtures as the first parameter. The remaining parameters will be the same as in the original Playwright request.
+
+For example, if an API call using Playwright's standard `get` is:
+
+```js
+const responseGet = await request.get(`${baseUrl}/posts/1`);
+```
+
+Then, using the new `apiGet` function, the call will be:
+
+```js
+const responseGet = await apiGet({ request, page }, `${baseUrl}/posts/1`);
+```
+
+
+### Examples
+
 ```js
 // tests/example.spec.ts
 
 import { test, expect } from '@playwright/test';
-import { apiFetch, apiGet, apiPost, apiPut, apiDelete, apiPatch, apiHead } from '../src/index';
+import { apiFetch, apiGet, apiPost, apiPut, apiDelete, apiPatch, apiHead } from 'pw-api';
 
 
 test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
 
     const baseUrl = 'https://jsonplaceholder.typicode.com';
 
-    test('Testing API Endpoints - Perform Single Call for Each CRUD Operation (GET, POST, PUT, PATCH, DELETE)', async ({ request, page }) => {
+    test('Testing API Endpoints - Perform Single Call for Each CRUD Operation (GET, HEAD, POST, PUT, PATCH, DELETE)', async ({ request, page }) => {
+
         // Example of apiGet
         const responseGet = await apiGet({ request, page }, `${baseUrl}/posts/1`);
         expect(responseGet.status()).toBe(200);
         const responseBodyGet = await responseGet.json();
         expect(responseBodyGet).toHaveProperty('id', 1);
+
+
+        // Example of apiHead
+        const responseHead = await apiHead({ request, page }, `${baseUrl}/posts/1`);
+        expect(responseHead.status()).toBe(200);
 
 
         // Example of apiPost with request body and request headers
@@ -166,6 +203,8 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
             }
         });
         expect(responsePost.status()).toBe(201);
+        const responseBodyPost = await responsePost.json();
+        expect(responseBodyPost).toHaveProperty('id', 101);
 
 
         // Example of apiPut
@@ -181,6 +220,8 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
             },
         });
         expect(responsePut.ok()).toBeTruthy();
+        const responseBodyPut = await responsePut.json();
+        expect(responseBodyPut).toHaveProperty('id', 1);
 
 
         // Example of apiPatch
@@ -198,6 +239,7 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
         // Example for apiDelete
         const responseDelete = await apiDelete({ request, page }, 'https://jsonplaceholder.typicode.com/posts/1');
         expect(responseDelete.ok()).toBeTruthy();
+
     })
 
 
@@ -205,6 +247,8 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
         // Example of apiFetch (default GET)
         const responseFetch = await apiFetch({ request, page }, `${baseUrl}/posts`);
         expect(responseFetch.status()).toBe(200);
+        const responseBodyFetch = await responseFetch.json();
+        expect(responseBodyFetch.length).toBeGreaterThan(4);
     })
 
 })

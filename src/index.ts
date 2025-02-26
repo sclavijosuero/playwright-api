@@ -189,14 +189,18 @@ const createApiCallHtml = async (response: APIResponse, options?: object): Promi
 
     const responseStatus = response.status();
     const statusClass = responseStatus.toString().charAt(0) + 'xx';
-    const responseHeaders = response.headers();
 
-    const responseBody = await response.json();
+    let responseBody;
+    if (requestMethod !== 'HEAD') {
+        responseBody = await response.json();
+    }
+
     const responseBodyJson = responseBody ? formatJson(responseBody) : undefined;
 
     const url = response.url();
 
     // If decided to add response header to the API call card
+    // const responseHeaders = response.headers();
     // const responseHeadersJson = responseHeaders ? formatJson(responseHeaders) : undefined;
 
     // Add to the returned html string after <br>
