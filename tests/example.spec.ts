@@ -8,19 +8,19 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
 
     test('Testing API Endpoints - Perform Single Call for Each CRUD Operation (GET, HEAD, POST, PUT, PATCH, DELETE)', async ({ request, page }) => {
 
-        // Example of apiGet
+        // ✔️ Example of apiGet
         const responseGet = await apiGet({ request, page }, `${baseUrl}/posts/1`);
         expect(responseGet.status()).toBe(200);
         const responseBodyGet = await responseGet.json();
         expect(responseBodyGet).toHaveProperty('id', 1);
 
 
-        // Example of apiHead
+        // ✔️ Example of apiHead
         const responseHead = await apiHead({ request, page }, `${baseUrl}/posts/1`);
         expect(responseHead.status()).toBe(200);
 
 
-        // Example of apiPost with request body and request headers
+        // ✔️ Example of apiPost (with request body and request headers)
         const responsePost = await apiPost({ request, page }, `${baseUrl}/posts`, {
             body: {
                 title: 'foo',
@@ -36,7 +36,7 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
         expect(responseBodyPost).toHaveProperty('id', 101);
 
 
-        // Example of apiPut
+        // ✔️ Example of apiPut (with request body and request headers)
         const responsePut = await apiPut({ request, page }, 'https://jsonplaceholder.typicode.com/posts/1', {
             body: {
                 id: 1,
@@ -53,7 +53,7 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
         expect(responseBodyPut).toHaveProperty('id', 1);
 
 
-        // Example of apiPatch
+        // ✔️ Example of apiPatch (with request body and request headers)
         const responsePatch = await apiPatch({ request, page }, 'https://jsonplaceholder.typicode.com/posts/1', {
             body: {
                 title: 'foo',
@@ -65,7 +65,7 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
         expect(responsePatch.ok()).toBeTruthy();
 
 
-        // Example for apiDelete
+        // ✔️ Example for apiDelete
         const responseDelete = await apiDelete({ request, page }, 'https://jsonplaceholder.typicode.com/posts/1');
         expect(responseDelete.ok()).toBeTruthy();
 
@@ -73,15 +73,13 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
 
 
     test('Verify Single API Call Using apiFetch with Default GET Method', async ({ request, page }) => {
-        // Example of apiFetch (default GET)
+
+        // ✔️ Example of apiFetch (default GET)
         const responseFetch = await apiFetch({ request, page }, `${baseUrl}/posts`);
         expect(responseFetch.status()).toBe(200);
         const responseBodyFetch = await responseFetch.json();
         expect(responseBodyFetch.length).toBeGreaterThan(4);
+        
     })
 
 })
-
-// test.describe('API Tests for ...', () => {
-
-// })
