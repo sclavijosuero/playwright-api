@@ -1,4 +1,4 @@
-# pw-api (Beta)
+# pw-api
 
 Playwright plugin for comprehensive API testing and presenting results in a user-friendly manner in the Playwright UI.
 
@@ -266,5 +266,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Changelog
 
-### [0.0.1] (Beta)
-
+### [1.0.0]
+- Initial release.
