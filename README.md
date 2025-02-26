@@ -250,7 +250,7 @@ test.describe('API Tests for https://jsonplaceholder.typicode.com', () => {
         expect(responseFetch.status()).toBe(200);
         const responseBodyFetch = await responseFetch.json();
         expect(responseBodyFetch.length).toBeGreaterThan(4);
-        
+
     })
 
 })
@@ -263,7 +263,20 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contributing
 
-[...]
+First off, thanks for taking the time to contribute!
+
+To contribute, please follow the best practices promoted by GitHub on the [Contributing to a project](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project "Contributing to a project") page.
+
+And if you like the project but just don't have the time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
+- Star the project
+- Promote it on social media
+- Refer this project in your project's readme
+- Mention the project at local meetups and tell your friends/colleagues
+- Buying me a coffee or contributing to a training session, so I can keep learning and sharing cool stuff with all of you.
+
+<a href="https://www.buymeacoffee.com/sclavijosuero" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 150px !important;" ></a>
+
+Thank you for your support!
 
 
 ## Changelog
